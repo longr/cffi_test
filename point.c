@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Point.h"
+#include "point.h"
 
 /* display a Point value */
 void show_point(Point point) {

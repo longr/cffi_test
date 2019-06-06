@@ -14,7 +14,9 @@ ffi.set_source("_point",
                # The important thing is to include the pre-built lib in the list of
                # libraries we are linking against:
                #libraries=['point'],
-               library_dirs=[os.path.dirname(__file__),'',],
+               #library_dirs=[os.path.dirname(__file__),'',],
+               #extra_objects=['/home/longr/Public/PyCFFI/my_cffi/_point.o'],
+               #include_dirs=['/home/longr/Public/PyCFFI/my_cffi','.','./build'],
                include_dirs=['.','./build'],
 )
 
