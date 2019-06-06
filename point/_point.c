@@ -751,13 +751,13 @@ _cffi_pypyinit__point(const void *p[])
 PyMODINIT_FUNC
 PyInit__point(void)
 {
-  return _cffi_init("_point", 0x2601, &_cffi_type_context);
+  return _cffi_init("point._point", 0x2601, &_cffi_type_context);
 }
 #else
 PyMODINIT_FUNC
 init_point(void)
 {
-  _cffi_init("_point", 0x2601, &_cffi_type_context);
+  _cffi_init("point._point", 0x2601, &_cffi_type_context);
 }
 #endif
 
