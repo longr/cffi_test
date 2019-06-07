@@ -178,3 +178,16 @@ Basic tree is:
 \--- src
      |--- point.c
      \--- point.h
+
+
+##
+Links:
+- https://python-packaging.readthedocs.io/en/latest/minimal.html
+- https://inventwithpython.com/blog/2019/06/05/pythonic-ways-to-use-dictionaries/
+- https://dbader.org/blog/python-cffi
+- https://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/contributing.html
+- https://github.com/jiffyclub/cext23#cffi
+- https://dzone.com/articles/executable-package-pip-install
+- https://packaging.python.org/tutorials/installing-packages/
+- https://realpython.com/python-modules-packages/
+- https://dmerej.info/blog/post/chuck-norris-part-5-python-cffi/
