@@ -1,4 +1,8 @@
-# Test base.
+# CFFI - Python and C example.
+
+This will mature into something better, but for now it is notes and scriblings as I fumble through running C code in python using cffi.  Links tho pages that have been used to achieve this are listed at the bottom.  Main source of knowledge has been Dimitri Merejkowsky's lets build chuck norris, and the code for this (point) comes from Jim Anderson's contribution on dbader.org
+
+
 
 ## Build and install
 Build using
@@ -169,6 +173,8 @@ Layout is perhaps optional, but a module layout with module_name, and src is cle
 
 Basic tree is:
 
+
+```
 .---point
 |   |--- build_point.py
 |   |--- __init__.py
@@ -178,7 +184,7 @@ Basic tree is:
 \--- src
      |--- point.c
      \--- point.h
-
+```
 
 ##
 Links:
