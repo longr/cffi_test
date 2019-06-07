@@ -45,6 +45,8 @@ point.point.Point()
 
 ### setup.py
 
+Needed to install packages.  Also calls files to build our c library.
+
 ```
 from setuptools import setup#, find_packages
 
@@ -68,3 +70,111 @@ name, version, and descrition are obvious.
 
 ### build_point.py
 
+Should read CFFI docs at https://cffi.readthedocs.org/en/latest/ to explain this file.
+
+create an instance of FFI() (name it that same as we did in the ```cffi_modules``` line of ```setup.py```
+
+```
+ffi = cffi.FFI()
+```
+
+Then we use ```cdef``` to declare the functions, variables, and so on that we have defined in out c code and want to access from our C extenion.  # https://cffi.readthedocs.org/en/latest/cdef.html#ffi-cdef-declaring-types-and-functions.  These are usually the things in your .h file(s)
+
+Could do this manually as:
+
+```
+ffi.cdef(
+	"""
+	/* Simple structure for ctypes example */
+	typedef struct {
+	    int x;
+	    int y;
+	    } Point;
+
+	void show_point(Point point);
+	void move_point(Point point);
+	void move_point_by_ref(Point *point);
+	Point get_default_point(void);
+	Point get_point(int x, int y);
+	""")
+```
+
+If we want all accessible, or don't mind, then we could do:
+
+```
+with open("src/point.h") as f:
+    ffi.cdef(f.read())
+```
+
+which instructs python to read in our point.h and send the contents to ```ffc.cdef```.  This fits better with DRY (Do not Repeat Yourself).
+
+Next we need to tell ```ffi``` about our source files (the .c and associated files.)
+
+```
+# set_source is where you specify all the include statements necessary
+# for your code to work and also where you specify additional code you
+# want compiled up with your extension, e.g. custom C code you've written
+#
+# set_source takes mostly the same arguments as distutils' Extension, see:
+# https://cffi.readthedocs.org/en/latest/cdef.html#ffi-set-source-preparing-out-of-line-modules
+# https://docs.python.org/3/distutils/apiref.html#distutils.core.Extension     
+ffi.set_source("point._point",
+               '#include "point.h"',
+               include_dirs=['src/'],
+               sources=['src/point.c'],
+               extra_compile_args=['--std=c99'])
+```
+
+First argument is ***** which is usually the name of the directory containing the python module, followed by a dot, followed by an underscore, and then the name of the c library. ******EXPLAIN******
+
+**** REASON FOR .h?? *********
+The next are more obvious, any directories we need to include for it to be able to compile, we put in a list and pass to ```include_dirs```.  Same with source files.
+
+Finally we need to run the compile method on our ```ffi``` object so that is will compile our c library.
+
+```
+ffi.compile(verbose=False)
+```
+
+
+
+### calling the library from python
+
+Next we need to call out module from python. We need a python file that can import this compiled library.  The first thing we need to do in this file is import the our compiled library.
+
+```
+import _<library_name>
+```
+
+in the case of this example, that is:
+
+```
+import _point
+```
+
+Then we can access the methods and functions by doing:
+
+```
+<imported_module>.lib.<method/function/variable>
+```
+
+which again for our case is:
+
+```
+_point.lib.get_point(x, y)
+```
+
+### Layout
+Layout is perhaps optional, but a module layout with module_name, and src is cleaner.
+
+Basic tree is:
+
+.---point
+|   |--- build_point.py
+|   |--- __init__.py
+|   \--- point.py
+|--- README.md
+|--- setup.py
+\--- src
+     |--- point.c
+     \--- point.h
