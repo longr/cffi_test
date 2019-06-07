@@ -1,9 +1,10 @@
-import os
+#import os
 import cffi
 ffi = cffi.FFI()
 
 #with open(os.path.join(os.path.dirname(__file__), "point.h")) as f:
-with open(os.path.join(os.path.dirname(__file__), "../src/point.h")) as f:
+#with open(os.path.join(os.path.dirname(__file__), "../src/point.h")) as f:
+with open("src/point.h") as f:
     ffi.cdef(f.read())
     
 ffi.set_source("point._point",
@@ -19,7 +20,7 @@ ffi.set_source("point._point",
                #extra_objects=['/home/longr/Public/PyCFFI/my_cffi/_point.o'],
                #include_dirs=['/home/longr/Public/PyCFFI/my_cffi','.','./build'],
                include_dirs=['src/'],
-               sources=['src/point.c'],
-               extra_compile_args=['--std=c99'])
+               sources=['src/point.c'])
+               #extra_compile_args=['--std=c99'])
 
-ffi.compile(verbose=True)
+ffi.compile(verbose=False)
