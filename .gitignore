@@ -1,2 +1,5 @@
 dist/
 point.egg-info/
+*~
+*.o
+*.so
