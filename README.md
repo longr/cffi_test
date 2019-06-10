@@ -186,6 +186,14 @@ Basic tree is:
      \--- point.h
 ```
 
+NEED TO CHECK THIS.  PEP420 specifys namespace, new layout may be needed.
+
+
+### Manifest
+
+Need a `MANIFEST.in` and need to specify inclussion of `.h` files.  Need to check the reasoning behind this.
+
+
 ##
 Links:
 - https://python-packaging.readthedocs.io/en/latest/minimal.html
@@ -197,3 +205,11 @@ Links:
 - https://packaging.python.org/tutorials/installing-packages/
 - https://realpython.com/python-modules-packages/
 - https://dmerej.info/blog/post/chuck-norris-part-5-python-cffi/
+
+
+
+###Questions
+- PG 11, namespace and layout. Check how numpy handles this.
+- Check if usig slashes due to windows.
+- Data files, use pkg_resoucres
+- Tr y and figure out how matplotlib or numpy does its C code.
